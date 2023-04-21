@@ -1,5 +1,5 @@
 {
-  "name": "tailwind",
+  "name": "tailwind-config-custom",
   "version": "0.1.0",
   "description": "Shared Tailwind CSS config for all projects",
   "main": "index.js",
