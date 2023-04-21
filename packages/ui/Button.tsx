@@ -1,5 +1,9 @@
-import * as React from "react";
+import {FC} from 'react'
 
-export const Button = () => {
-  return <button>Boop</button>;
-};
+const Button: FC= () => {
+  return (
+    <div>Hello Button</div>
+  )
+}
+
+export {Button}
