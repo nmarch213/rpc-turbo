@@ -13,13 +13,13 @@
     "type-check": "turbo type-check"
   },
   "devDependencies": {
-    "eslint": "^8.38.0",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@types/prettier": "^2.7.2",
+    "eslint": "^8.39.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.7",
-    "turbo": "latest",
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "prettier-plugin-tailwindcss": "^0.2.7",
-    "typescript": "^5.0.4",
-    "@types/prettier": "^2.7.2"
+    "turbo": "^1.9.3",
+    "typescript": "^5.0.4"
   }
 }
