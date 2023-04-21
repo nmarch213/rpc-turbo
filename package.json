@@ -1,17 +1,25 @@
 {
+  "name": "freedemo",
+  "packageManager": "pnpm@7.15.0",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules",
+    "clean:workspaces": "turbo clean",
+    "dev": "turbo dev --parallel",
+    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
+    "lint": "turbo lint ",
+    "lint:fix": "turbo lint:fix ",
+    "type-check": "turbo type-check"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.38.0",
     "eslint-config-custom": "workspace:*",
-    "prettier": "^2.5.1",
-    "turbo": "latest"
-  },
-  "packageManager": "pnpm@7.15.0",
-  "name": "freedemo"
+    "prettier": "^2.8.7",
+    "turbo": "latest",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "typescript": "^5.0.4",
+    "@types/prettier": "^2.7.2"
+  }
 }
