@@ -8,8 +8,10 @@
  */
 import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { createChannel, createClient } from "nice-grpc-web";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { ProductServiceClient, ProductServiceDefinition } from "../generated/product"
 
 
 /**
@@ -22,8 +24,7 @@ import { ZodError } from "zod";
  *
  */
 type CreateContextOptions = {
-  // add the context you need here
-  // e.g. session: Session;
+  grpcClient: ProductServiceClient;
 };
 
 /**
@@ -36,9 +37,17 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
+
   return {
+    grpcClient: opts.grpcClient,
   };
 };
+
+const createGRPCClient = () => {
+
+  const channel =createChannel("http://localhost:8080")
+  return createClient(ProductServiceDefinition, channel);
+}
 
 /**
  * This is the actual context you'll use in your router. It will be used to
@@ -48,10 +57,10 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
-  // this is where you would get the session from the request
+  const grpcClient = createGRPCClient();
 
   return createInnerTRPCContext({
-    // where you would pass the session
+    grpcClient,
   });
 };
 
