@@ -4,7 +4,7 @@ import { api } from "~/utils/api";
 export default function Web() {
 
 
-  const { data, isLoading } = api.products.byId.useQuery();
+  const { data, isLoading } = api.greeter.hello.useQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -18,7 +18,7 @@ export default function Web() {
       <div className="mt-4">
         <h2 className="font-bold text-lg">Products</h2>
         <ul>
-          {data.name}
+          {data?.message}
         </ul>
       </div>
       <Button />
