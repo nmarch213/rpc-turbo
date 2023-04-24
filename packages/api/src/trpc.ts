@@ -12,7 +12,7 @@ import { createChannel, createClient } from "nice-grpc-web";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { ProductServiceClient, ProductServiceDefinition } from "../generated/product"
-import { GreeterClient, GreeterDefinition, GreeterServiceImplementation} from "../generated/greet"
+import { GreeterClient, GreeterDefinition, GreeterServiceImplementation } from "../generated/greet"
 
 
 /**
@@ -25,7 +25,7 @@ import { GreeterClient, GreeterDefinition, GreeterServiceImplementation} from ".
  *
  */
 type CreateContextOptions = {
-  grpcClient: GreeterClient;
+  grpcClient: GreeterClient | ProductServiceClient;
 };
 
 /**
@@ -46,7 +46,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 
 const createGRPCClient = () => {
 
-  const channel =createChannel("http://localhost:5207")
+  const channel = createChannel("http://localhost:5207")
   return createClient(GreeterDefinition, channel);
 }
 
