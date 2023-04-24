@@ -1,0 +1,13 @@
+appId: com.example.nextron
+productName: My Nextron App
+directories:
+  output: dist
+  buildResources: resources
+  app: .
+files:
+  - "**/preload.js"
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null

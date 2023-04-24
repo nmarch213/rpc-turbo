@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "name": "kiosk-e",
+  "description": "",
+  "version": "1.0.0",
+  "main": "app/background.js",
+  "scripts": {
+    "dev": "nextron",
+    "build": "nextron build",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "electron-serve": "^1.1.0",
+    "electron-store": "^8.1.0",
+    "electron-trpc": "^0.5.0"
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^4.29.3",
+    "@trpc/client": "^10.21.1",
+    "@trpc/next": "^10.21.1",
+    "@trpc/server": "^10.21.1",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "api": "workspace:*",
+    "autoprefixer": "^10.4.7",
+    "electron": "^21.3.3",
+    "electron-builder": "^23.6.0",
+    "next": "^12.3.0",
+    "nextron": "^8.5.0","postcss": "^8.4.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "superjson": "^1.12.3",
+    "tailwind-config-custom": "workspace:*",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.9.4",
+    "ui": "workspace:*",
+    "zod": "^3.21.4"
+  }
+}
