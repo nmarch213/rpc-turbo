@@ -6,15 +6,27 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { TRPCError, initTRPC } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { createChannel, createClient } from "nice-grpc-web";
+import { createChannel, createClient } from "nice-grpc";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { ProductServiceClient, ProductServiceDefinition } from "../generated/product"
-import { GreeterClient, GreeterDefinition, GreeterServiceImplementation } from "../generated/greet"
+import { ProductServiceClient, ProductServiceDefinition } from '../generated/product';
+import { StoresServiceClient, StoresServiceDefinition } from '../generated/store';
 
 
+export interface KioskGateway {
+  kioskSpecific: any;
+}
+
+export interface MobileGateway {
+  mobileSpecific: any;
+}
+
+export interface CommonGateway {
+  stores: StoresServiceClient;
+  products: ProductServiceClient;
+}
 /**
  * 1. CONTEXT
  *
@@ -25,8 +37,12 @@ import { GreeterClient, GreeterDefinition, GreeterServiceImplementation } from "
  *
  */
 type CreateContextOptions = {
-  grpcClient: GreeterClient | ProductServiceClient;
+  // kioskGateway: KioskGateway
+  // mobileGateway: MobileGateway
+  // commonGateway: CommonGateway
+  gateway: CommonGateway
 };
+
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -40,14 +56,17 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
 
   return {
-    grpcClient: opts.grpcClient,
+    grpcClient: opts.gateway,
   };
 };
 
 const createGRPCClient = () => {
+    const channel = createChannel("http://localhost:7172");
 
-  const channel = createChannel("http://localhost:5207")
-  return createClient(GreeterDefinition, channel);
+    return {
+      stores: createClient(StoresServiceDefinition, channel),
+      products: createClient(ProductServiceDefinition, channel)
+    };
 }
 
 /**
@@ -61,7 +80,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const grpcClient = createGRPCClient();
 
   return createInnerTRPCContext({
-    grpcClient,
+    gateway: grpcClient,
   });
 };
 

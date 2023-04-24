@@ -23,8 +23,8 @@
     "@trpc/client": "^10.21.1",
     "@trpc/server": "^10.21.1",
     "long": "^5.2.3",
+    "nice-grpc": "^2.1.4",
     "nice-grpc-common": "^2.0.2",
-    "nice-grpc-web": "^3.2.4",
     "protobufjs": "^7.2.3",
     "superjson": "^1.12.3",
     "zod": "^3.21.4"

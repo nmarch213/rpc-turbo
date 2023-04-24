@@ -1,11 +1,13 @@
 import { greeterRouter } from "./router/greeter";
 import { productsRouter } from "./router/products";
+import { storesRouter } from "./router/stores";
 import { createTRPCRouter } from "./trpc";
 
 
 export const router = createTRPCRouter({
   products: productsRouter,
-  greeter: greeterRouter
+  greeter: greeterRouter,
+  stores: storesRouter
 
 })
 
